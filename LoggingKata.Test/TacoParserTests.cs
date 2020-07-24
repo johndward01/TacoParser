@@ -22,10 +22,19 @@ namespace LoggingKata.Test
         }
 
         [Theory]
-        [InlineData("Example")]
-        public void ShouldParse(string str)
+        [InlineData("34.073638, -84.677017, Taco Bell Acwort...", 34.073638, -84.677017, " Taco Bell Acwort...")]
+        public void ShouldParse(string fullString, double latitude, double longitude, string tacoBellName)
         {
             // TODO: Complete Should Parse
+
+            // Arrange
+            var should = new TacoParser();
+            //Act
+            var actual = should.Parse(fullString);
+            //Assert
+            Assert.Equal(latitude, actual.Location.Latitude);
+            Assert.Equal(longitude, actual.Location.Longitude);
+            Assert.Equal(tacoBellName, actual.Name);
         }
 
         [Theory]
@@ -34,6 +43,15 @@ namespace LoggingKata.Test
         public void ShouldFailParse(string str)
         {
             // TODO: Complete Should Fail Parse
+
+            //Arrange
+            var should = new TacoParser();
+
+            //Act
+            var actual = should.Parse(str);
+
+            //Assert
+            Assert.Null(actual);
         }
     }
 }

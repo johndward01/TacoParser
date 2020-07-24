@@ -11,10 +11,10 @@ namespace LoggingKata
         const string csvPath = "TacoBell-US-AL.csv";
         const double metersToMiles = 0.00062137;
 
-        // Grab the path from the name of your file
 
         static void Main(string[] args)
         {
+        // Grab the path from the name of your file
             logger.LogInfo("Log initialized");
 
             // use File.ReadAllLines(path) to grab all the lines from your csv file
@@ -51,12 +51,31 @@ namespace LoggingKata
             // Create a new corA Coordinate with your locA's lat and long
             // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`)
             // Create a new Coordinate with your locB's lat and long
-            for (int i = 0; i < locations.Length; i++)
+            for (int z = 0; z < locations.Length; z++)
             {
-                var locA = locations[i];
+                var locA = locations[z];
                 var corA = locA.Location;
                 geo1.Latitude = corA.Latitude;
                 geo1.Longitude = corA.Longitude;
+
+                if (locA.Location.Latitude > 34.988773 ||
+                    locA.Location.Latitude < 30.174832 ||
+                    locA.Location.Longitude < -88.450682 ||
+                    locA.Location.Longitude > -84.818467)
+                    {
+                        geo1.Latitude = 33.006110;
+                        geo1.Longitude = -86.718127;
+                    }
+            }
+
+            for (int i = 0; i < locations.Length; i++)
+            {
+                var locA = locations[i];               
+                var corA = locA.Location;
+                geo1.Latitude = corA.Latitude;
+                geo1.Longitude = corA.Longitude;
+
+                
 
                 for (int j = 0; j < locations.Length; j++)
                 {
@@ -64,17 +83,17 @@ namespace LoggingKata
                     var corB = locB.Location;
                     geo2.Latitude = corB.Latitude;
                     geo2.Longitude = corB.Longitude;
-                    var testDistance = geo2.GetDistanceTo(geo1);
-
+                    var testDistance = geo2.GetDistanceTo(geo1);                   
+                  
                     if (finalDistance < testDistance)
                     {
                         finalDistance = testDistance;
                         tacoBell2 = locB;
-                        tacoBell1 = locA; 
-                    }
+                        tacoBell1 = locA;
+                    }                   
                 }
             }
-            Console.WriteLine($"The 2 furthest Taco Bell's in Alabama are {tacoBell1} and {tacoBell2}.");
+            Console.WriteLine($"The 2 furthest Taco Bell's in Alabama are {tacoBell1.Name} and {tacoBell2.Name}.");
             Console.WriteLine($"The total distance is {Math.Round((finalDistance * metersToMiles), 2)} miles.");
 
             // Now, compare the two using `.GetDistanceTo()`, which returns a double
@@ -83,5 +102,9 @@ namespace LoggingKata
             // TODO:  Find the two Taco Bells in Alabama that are the furthest from one another.
             // HINT:  You'll need two nested forloops.
         }
+
+
+
+       
     }
 }
