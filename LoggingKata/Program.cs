@@ -50,32 +50,14 @@ namespace LoggingKata
             // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
             // Create a new corA Coordinate with your locA's lat and long
             // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`)
-            // Create a new Coordinate with your locB's lat and long
-            for (int z = 0; z < locations.Length; z++)
-            {
-                var locA = locations[z];
-                var corA = locA.Location;
-                geo1.Latitude = corA.Latitude;
-                geo1.Longitude = corA.Longitude;
-
-                if (locA.Location.Latitude > 34.988773 ||
-                    locA.Location.Latitude < 30.174832 ||
-                    locA.Location.Longitude < -88.450682 ||
-                    locA.Location.Longitude > -84.818467)
-                    {
-                        geo1.Latitude = 33.006110;
-                        geo1.Longitude = -86.718127;
-                    }
-            }
+            // Create a new Coordinate with your locB's lat and long            
 
             for (int i = 0; i < locations.Length; i++)
             {
                 var locA = locations[i];               
                 var corA = locA.Location;
                 geo1.Latitude = corA.Latitude;
-                geo1.Longitude = corA.Longitude;
-
-                
+                geo1.Longitude = corA.Longitude;                
 
                 for (int j = 0; j < locations.Length; j++)
                 {
