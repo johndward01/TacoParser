@@ -22,6 +22,7 @@ namespace LoggingKata
         public void LogInfo(string log)
         {
             Console.WriteLine($"Info: {log}");
+            Console.WriteLine();
         }
 
         public void LogDebug(string log)
