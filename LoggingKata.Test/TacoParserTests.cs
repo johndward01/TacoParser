@@ -11,10 +11,8 @@ namespace LoggingKata.Test
             // TODO: Complete Something, if anything
             // Arrange
 
-            var tacoParser = new TacoParser();
-
             // Act
-            var actual = tacoParser.Parse("34.073638, -84.677017, Taco Bell Acwort...");
+            var actual = TacoParser.Parse("34.073638, -84.677017, Taco Bell Acwort...");
 
             // Assert
             Assert.NotNull(actual);
@@ -28,9 +26,9 @@ namespace LoggingKata.Test
             // TODO: Complete Should Parse
 
             // Arrange
-            var should = new TacoParser();
+
             //Act
-            var actual = should.Parse(fullString);
+            var actual = TacoParser.Parse(fullString);
             //Assert
             Assert.Equal(latitude, actual.Location.Latitude);
             Assert.Equal(longitude, actual.Location.Longitude);
@@ -45,10 +43,9 @@ namespace LoggingKata.Test
             // TODO: Complete Should Fail Parse
 
             //Arrange
-            var should = new TacoParser();
 
             //Act
-            var actual = should.Parse(str);
+            var actual = TacoParser.Parse(str);
 
             //Assert
             Assert.Null(actual);

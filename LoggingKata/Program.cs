@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO;
 using GeoCoordinatePortable;
+using LoggingKata.Logging;
 
 namespace LoggingKata
 {
@@ -17,13 +18,14 @@ namespace LoggingKata
             // logger.LogInfo($"Lines: {lines[0]}");
 
             var lines = File.ReadAllLines(csvPath);
+            LogHelper.Log(LogHelper.LogTarget.File, lines[0]);
 
             ITrackable tacoBell1 = null;
             ITrackable tacoBell2 = null;
             double finalDistance = 0;
             double testDistance = 0;
-            GeoCoordinate geo1 = new GeoCoordinate();
-            GeoCoordinate geo2 = new GeoCoordinate();
+            var geo1 = new GeoCoordinate();
+            var geo2 = new GeoCoordinate();
 
             var locations = lines.Select(TacoParser.Parse).ToArray();
 
