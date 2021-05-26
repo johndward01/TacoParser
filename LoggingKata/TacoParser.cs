@@ -7,16 +7,14 @@ namespace LoggingKata
     /// Parses a POI file to locate all the Taco Bells
     /// </summary>
     public class TacoParser
-    {
-        readonly ILog logger = new TacoLogger();
-        
+    {        
         public static ITrackable Parse(string line)
         {
-            //logger.LogInfo("Begin parsing");
             LogHelper.Log(LogHelper.LogTarget.File, line);
 
             if (line == null)
             {
+                LogHelper.Log(LogHelper.LogTarget.File, "Line was null");
                 return null;
             } 
 
@@ -24,9 +22,8 @@ namespace LoggingKata
 
             if (cells.Length < 3)
             {
-                // Log that and return null
-                // Do not fail if parsing one record fails, return null
-                return null; // TODO Implement
+                LogHelper.Log(LogHelper.LogTarget.File, "1 of the cells was null");
+                return null; 
             }
 
             var latitude = double.Parse(cells[0]);  

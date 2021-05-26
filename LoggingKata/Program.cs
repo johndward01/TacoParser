@@ -8,17 +8,19 @@ namespace LoggingKata
 {
     class Program
     {
-        static readonly ILog logger = new TacoLogger();
         const string csvPath = "CSV_Files/TacoBell-US-AL.csv";
         const double metersToMiles = 0.00062137;
 
         static void Main(string[] args)
         {
-            // logger.LogInfo("Log initialized");
-            // logger.LogInfo($"Lines: {lines[0]}");
+            #region Storing lines in string[] and logging the first line
 
             var lines = File.ReadAllLines(csvPath);
             LogHelper.Log(LogHelper.LogTarget.File, lines[0]);
+
+            #endregion
+
+            #region Declaring and initializing variables
 
             ITrackable tacoBell1 = null;
             ITrackable tacoBell2 = null;
@@ -27,6 +29,9 @@ namespace LoggingKata
             var geo1 = new GeoCoordinate();
             var geo2 = new GeoCoordinate();
 
+            #endregion
+
+            // Transforms each line (string) to an ITrackable object and saves it to the locations array
             var locations = lines.Select(TacoParser.Parse).ToArray();
 
             for (int i = 0; i < locations.Length; i++)
